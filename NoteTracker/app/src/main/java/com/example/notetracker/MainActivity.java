@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +34,24 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mListViewNotes.setAdapter(null);
+
+        ArrayList<Note> notes = Utilities.getAllSavedNotes(this);
+
+        if (notes == null || notes.size() == 0) {
+            if(notes==null)
+                Toast.makeText(this,"null is returned da",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No saved Notes", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            NoteAdapter na = new NoteAdapter(this, R.layout.item_note, notes);
+            mListViewNotes.setAdapter(na);
+        }
+
     }
 }

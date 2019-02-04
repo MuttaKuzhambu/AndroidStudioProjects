@@ -41,7 +41,8 @@ public class Note implements Serializable {
     public void setmContent(String mContent) {
         this.mContent = mContent;
     }
-    public String DateTimeFormatted(Context context){
+
+    public String getDateTimeFormatted(Context context){
         SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",
                 context.getResources().getConfiguration().locale);
         sdf.setTimeZone(TimeZone.getDefault());
