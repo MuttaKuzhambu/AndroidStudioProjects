@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Login FeedBack Form</string>
+    <string name="title_activity_view_feed_back">ViewFeedBack</string>
+</resources>
