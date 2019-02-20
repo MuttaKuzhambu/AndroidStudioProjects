@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -44,13 +46,21 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Note> notes = Utilities.getAllSavedNotes(this);
 
         if (notes == null || notes.size() == 0) {
-            if(notes==null)
-                Toast.makeText(this,"null is returned da",Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "No saved Notes", Toast.LENGTH_SHORT).show();
             return;
         } else {
             NoteAdapter na = new NoteAdapter(this, R.layout.item_note, notes);
             mListViewNotes.setAdapter(na);
+
+            mListViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String fileName=((Note)mListViewNotes.getItemAtPosition(position)).getmDateTime()+Utilities.FILE_EXTENSION;
+                        Intent viewNoteIntent=new Intent(getApplicationContext(),NoteActivity.class);
+                        viewNoteIntent.putExtra("NOTE_FILE",fileName);
+                        startActivity(viewNoteIntent);
+                }
+            });
         }
 
     }
