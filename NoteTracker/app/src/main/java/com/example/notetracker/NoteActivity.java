@@ -24,7 +24,7 @@ public class NoteActivity extends AppCompatActivity {
         mEtContent=findViewById(R.id.note_et_content);
 
         mNoteFileName=getIntent().getStringExtra("NOTE_FILE");
-        if(!mNoteFileName.isEmpty() && mNoteFileName!=null){
+        if(mNoteFileName!=null && !mNoteFileName.isEmpty()  ){
             mLoadedNote=Utilities.getNodeByName(this,mNoteFileName);
             if(mLoadedNote!=null){
                 mEtTitle.setText(mLoadedNote.getmTitle());
